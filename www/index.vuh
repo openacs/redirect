@@ -1,0 +1,58 @@
+ad_page_contract {
+
+    Redirect to the NewURL parameter setting of this package.
+
+}
+
+
+set new_url [parameter::get -parameter NewURL]
+
+if { [empty_string_p $new_url] } {
+    ad_return_error "NewURL not set" "The NewURL parameter of this redirect package is not set, so a redirect is not possible. Please set the parameter in the site-map."
+    ad_script_abort
+}
+
+if { !([util_complete_url_p $new_url] || [util_absolute_path_p $new_url]) } {
+    ad_return_error "NewURL must be an absolute path" "The NewURL parameter must either start with '/' or with a protocol and server, like 'http://myserver.com/'."
+    ad_script_abort
+}
+
+# transform url to an absolute path - copied from ad_returnredirect
+if { ![util_complete_url_p $new_url]} {
+    # /foo/bar.tcl style - prepend the current location:
+    set new_url [util_current_location]$new_url
+}
+
+if { [parameter::get -parameter PreservePathRemainings -default 1] } {
+    # append remaining path elements to new url
+    set new_url "[string trimright $new_url /]/[ad_conn path_info]"
+    if { ![empty_string_p [ad_conn query]] } {
+        append new_url "?[ad_conn query]"
+    }
+}
+
+ns_set put [ns_conn outputheaders] Location $new_url
+
+if { [parameter::get -parameter PermanentRedirect -default 1] } {
+    # permanent redirect
+    ns_return 301 text/html "<html>
+<head><title>Redirection</title></head>
+<body>
+<h2>Redirection</h2>
+<a href=\"$new_url\">The requested URL has moved here permanently.</a>
+</body>
+</html>
+"
+} else {
+    # non-permanent redirect
+    ns_return 302 text/html "<html>
+<head><title>Redirection</title></head>
+<body>
+<h2>Redirection</h2>
+<a href=\"$new_url\">The requested URL has moved here.</a>
+</body>
+</html>
+"
+}
+
+return

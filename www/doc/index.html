@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>Documentation for the Redirect package</title>
+</head>
+
+<body>
+<h1>Documentation for the Redirect package</h1>
+
+<h2>Introduction</h2>
+
+This is a simple package that sends a redirect to another location,
+depending on its parameter settings. It is intended for the situation
+when you moved parts of your site to another location in order to
+reorganise your site, but don't want old links such as users
+bookmarks, links from remote sites, external search engine hits
+etc. to break.
+
+<h2>Usage</h2>
+
+Mount it at the old location using the openacs site-map, and set its
+NewURL parameter to the new location. E.g. when you moved a tree of
+your site from '/some/old/path/' to '/newurl/' then mount an instance
+of redirect at '/some/old/path/', and set its NewURL parameter to
+'/newurl/'.
+
+
+<h2>Parameters</h2>
+
+<h3>NewURL</h3>
+
+The URL to redirect to. E.g. /some/path/ or http://anotherserver.com/some/path/.
+<p>
+
+Relative paths like 'some/other/path/' are not possible.
+
+
+<h3>PreservePathRemainings</h3>
+
+Wether to preserve the remainings of the requested path, e.g. if set
+to true then the redirect /some/old/path/bla/bla goes to
+/some/new/path/bla/bla, otherwise it goes to /some/new/path/,
+regardless of what followed the request. In most cases makes sense to
+leave set to true.
+
+<p>
+
+This also includes query parameters, so that a request for
+'/some/old/path/bla?item_id=100' gets redirected to
+'/newurl/bla?item_id=100' when set to true.
+
+
+<h3>PermanentRedirect</h3>
+
+Indicate to the requesting browser that this is a permanent
+redirect. The browser might react by updating a bookmark to the new
+url for example. Leave set to true if unsure.
+
+<p>
+
+Note that this results in different http status codes. A permanent
+redirect is http status 301, a non-permanent is 302. See general http
+documentation for more info about the consequences.
+
+<h2>Pass Through of Requests</h2>
+
+This package does not pass through http requests - see the gatekeeper
+package for this functionality. (Maybe gatekeeper will be merged into
+this package some day though.)
+
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Mon Sep 29 13:10:03 GMT 2003 <!-- hhmts end -->
+</body> </html>
