@@ -9,13 +9,9 @@
     
     <version name="0.3" url="http://openacs.org/repository/download/apm/redirect-0.3.apm">
         <owner url="mailto:tils@tils.net">Tilmann Singer</owner>
-        <summary>Simple package that redirects from the URL it is mounted on to another URL.</summary>
+        <summary>Simple redirection package.</summary>
         <release-date>2003-09-29</release-date>
-        <description format="text/plain">Simple package that redirects from the URL it is mounted on to another URL. Useful when you have moved content to a new place but don't want old links to break.
-
-The new URL can be entered with a parameter setting.
-
-Note that it does not pass through requests to another application, e.g. one that is running on apache. Use the gatekeeper package for this.</description>
+        <description format="text/plain">Redirects from the URL at which it is mounted on to another URL. Useful when you have moved content to a new place but don't want old links to break.  The new URL can be entered with a parameter setting.  Note that it does not pass through requests to another application, e.g. one that is running on apache. Use the gatekeeper package for this.</description>
 
         <!-- No dependency information -->
 
