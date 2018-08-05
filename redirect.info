@@ -20,7 +20,7 @@
         <parameters>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="NewURL"  description="The URL to redirect to. E.g. /some/path/ or http://myserver.com/some/path/"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="PermanentRedirect"  default="1" description="Indicate to the requesting browser that this is a permanent redirect. The browser might react by updating a bookmark to the new url for example. Leave set to true if unsure."/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="PreservePathRemainings"  default="1" description="Wether to preserve the remainings of the requested path, e.g. if set to true then the redirect /some/old/path/bla/bla goes to /some/new/path/bla/bla, otherwise it goes to /some/new/path/, regardless of what followed the request. In most cases makes sense to leave set to true."/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="PreservePathRemainings"  default="1" description="Whether to preserve the remainings of the requested path, e.g. if set to true then the redirect /some/old/path/bla/bla goes to /some/new/path/bla/bla, otherwise it goes to /some/new/path/, regardless of what followed the request. In most cases makes sense to leave set to true."/>
         </parameters>
 
     </version>
